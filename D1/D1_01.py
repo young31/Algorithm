@@ -1,5 +1,4 @@
-import time
-start = time.time()
+#116ms, 101
 n = int(input())
 
 for i in range(n+1, 0, -1) :

@@ -1,3 +1,4 @@
+# 122ms, 191
 [a, b] =list(map(int,input().split( )))
 
 def go_(a,b) :

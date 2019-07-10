@@ -1,3 +1,4 @@
+#122ms, 107
 N= list(map(int, input().split( )))
 
 p, k = N[0], N[1]
