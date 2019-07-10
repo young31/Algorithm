@@ -6,4 +6,7 @@ for i in range(n+1, 0, -1) :
         print(0)
     print(i-1, end=' ')
 
-print(time.time() - start)
+
+a = int(input())
+for k in range(a, -1, -1):
+    print(k, end=' ')
