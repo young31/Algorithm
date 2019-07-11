@@ -41,7 +41,6 @@ def check_d(month, day):
     return result
  
  
-
 T = int(input())
 for i in range(T):
     date = input()
