@@ -8,3 +8,9 @@ for i in range(0,len(letter)) :
 letter2 = "".join(letter)
  
 print(letter2)
+
+
+# jeong 114ms, 33
+
+a = str(input())
+print(a.upper())
