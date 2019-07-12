@@ -9,4 +9,4 @@
 ## 사전학습(문제는 선택) >> D1 >> D2 >> INT 
 
 ## 시간을 줄이는 함수 선택(지속적으로 추가예정)
-.sort(), .reverse() -->> sorted(~), reversed(~)
+.sort(), .reverse() -->> sorted('set'), reverse('set')
