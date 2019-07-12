@@ -9,3 +9,21 @@ for i in range(1,4):
         k = "="
     else : k= ">"
     print("#{0} {1}".format(i,k))
+    
+    
+
+# jeong 123ms, 219
+
+T = int(input())
+
+for i in range(T):
+    a, b = map(int, input().split())
+    
+    if a > b:
+        result = '>'
+    elif a < b:
+        result = '<'
+    else:
+        result = '='
+    
+    print(f'#{i + 1} {result}')
