@@ -1,12 +1,9 @@
 # Algorithm
-## *** CAUTIOUS ***  
-## First pull, before push !!
-### git pull origin master >> git commit >> git push origin master 
-### 저는 이렇게 하니까 정상작동하더랍니다
+Computational Thinking을 위한 문제풀이 
 
 # 추천 학습순서
+사전학습(문제는 선택) >> D1 >> D2 >> INT 
 
-## 사전학습(문제는 선택) >> D1 >> D2 >> INT 
-
-## 시간을 줄이는 함수 선택(지속적으로 추가예정)
-.sort(), .reverse() -->> sorted('set'), reverse('set')
+# 역할은 같지만 유용한 형태들(editing)
+- .sort(), .reverse() -->> sorted('set'), reverse('set')
+- 조건에 맞는 리스트구하기: for문 >> filter(lambda x: __ )
