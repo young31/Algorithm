@@ -24,6 +24,6 @@
 21. [회문](https://github.com/young31/Algorithm/blob/master/D2/D2_21.py)
 22. [영역 최대값](https://github.com/young31/Algorithm/blob/master/D2/D2_22.py)
 23. [파스칼삼각형](https://github.com/young31/Algorithm/blob/master/D2/D2_23.py)(제출오류)
-24. [패턴마디]-미해결
+24. [패턴마디](https://github.com/young31/Algorithm/blob/master/D2/D2_24.py)
 25. [369](https://github.com/young31/Algorithm/blob/master/D2/D2_25.py)
 26. [이윤최대화](https://github.com/young31/Algorithm/blob/master/D2/D2_26.py)
