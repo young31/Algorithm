@@ -67,5 +67,6 @@ def main2():
         else: # 아니면 집합 구분하고 다음으로
             union_parent(parent, a, b)
 
+main()
 main1()
 
