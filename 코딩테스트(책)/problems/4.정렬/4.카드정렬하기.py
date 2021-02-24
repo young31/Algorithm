@@ -4,14 +4,19 @@ cards = [10, 20, 40]
 # answer: 100
 
 # algo
+import heapq
 def solution(n, cards):
-    cards = sorted(cards)
-    mul = reversed(range(1, n+1))
-
-    res = -cards[0]
-    for c, m in zip(cards, mul):
-        res += c*m
+    card = []
+    for c in cards:
+        heapq.heappush(card, c)
     
+    res = 0
+    while len(card) >= 2:
+        a = heapq.heappop(card)
+        b = heapq.heappop(card)
+        res += (a+b)
+        heapq.heappush(card, (a+b))
+
     print(res)
 
 solution(n, cards)
