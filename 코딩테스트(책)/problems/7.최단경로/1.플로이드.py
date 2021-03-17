@@ -24,42 +24,23 @@ graph = [
 # 7 4 10 6 0
 
 # algo
-from pprint import pprint
-# def solution(n, m, graph):
-#     inf = int(1e10)
-#     mat = [[inf for _ in range(n)] for _ in range(n)]
-#     for i in range(n):
-#         mat[i][i] = 0
+def solution(n, m, graph):
+    inf = int(1e10)
+    mat = [[inf for _ in range(n)] for _ in range(n)]
+    for i in range(n):
+        mat[i][i] = 0
 
-#     for a, b, c in graph:
-#         mat[a-1][b-1] = min(c, mat[a-1][b-1])
+    for a, b, c in graph:
+        mat[a-1][b-1] = min(c, mat[a-1][b-1])
 
-#     for k in range(n):
-#         for i in range(n):
-#             for j in range(n):
-#                 mat[i][j] = min(mat[i][j], mat[i][k]+mat[k][j])
+    for k in range(n):
+        for i in range(n):
+            for j in range(n):
+                mat[i][j] = min(mat[i][j], mat[i][k]+mat[k][j])
 
-#     for i in range(n):
-#         for j in range(n):
-#             print(mat[i][j], end=' ')
-#         print()
-
-# solution(n, m, graph)
-
-inf = int(1e10)
-mat = [[inf for _ in range(n)] for _ in range(n)]
-for i in range(n):
-    mat[i][i] = 0
-
-for a, b, c in graph:
-    mat[a-1][b-1] = min(c, mat[a-1][b-1])
-
-for k in range(n):
     for i in range(n):
         for j in range(n):
-            mat[i][j] = min(mat[i][j], mat[i][k]+mat[k][j])
+            print(mat[i][j], end=' ')
+        print()
 
-for i in range(n):
-    for j in range(n):
-        print(mat[i][j], end=' ')
-    print(i)
+solution(n, m, graph)
