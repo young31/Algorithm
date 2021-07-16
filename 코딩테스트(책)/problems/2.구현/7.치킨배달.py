@@ -80,7 +80,6 @@ def main(n, m, arr):
 
     mat=build_matrix(chicks, houses)
 
-    ans=999
     ls=[0 for _ in range(len(chicks))]
     print(comb(mat, ls, 0, m))
 

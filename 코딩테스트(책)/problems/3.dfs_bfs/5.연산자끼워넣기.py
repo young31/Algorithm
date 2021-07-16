@@ -13,28 +13,32 @@ op3 = [2, 1, 1, 1]
 # answer: 30, 30 // 35, 17 // 54, -24
 
 # algo
-# def perm(arr, n, k=0):
-#     global max_n, min_n
-#     if k == len(arr):
-#         print(arr)
-#         res = do_op(n, arr)
-#         if res > max_n:
-#             max_n = res
-#         if res < min_n:
-#             min_n = res
-#         return
-#     else:
-#         for i in range(len(arr)):
-#             if arr[i] != arr[k]:
-#                 arr[i], arr[k] = arr[k], arr[i]
-#                 perm(arr, n, k+1)
-#                 arr[i], arr[k] = arr[k], arr[i]
-#             else:
-#                 perm(arr, n, k+1)
+def perm(arr, n, k=0):
+    global max_n, min_n, cnt
+    cnt += 1
+    # print(arr)
+    if k == len(arr):
+        print(arr)
+        res = do_op(n, arr)
+        if res > max_n:
+            max_n = res
+        if res < min_n:
+            min_n = res
+        return
+    else:
+        for i in range(k, len(arr)):
+            if arr[i] != arr[k]:
+                arr[i], arr[k] = arr[k], arr[i]
+                perm(arr, n, k+1)
+                arr[i], arr[k] = arr[k], arr[i]
+            else:
+                perm(arr, n, k+1)
 
 def perm(arr):
+    global cnt
     # 해당 방식으로는 중복처리를 어떻게 잘라낼지 모르겠다.
     if len(arr) == 1:
+        cnt += 1
         yield arr
     else:
         for i in range(len(arr)):
@@ -77,17 +81,26 @@ def main(n, op):
     
     print(max_n, min_n)
 
-
+cnt = 0
 main(a1, op1)
+print(cnt)
+cnt = 0
 main(a2, op2)
+print(cnt)
+cnt = 0
 main(a3, op3)
+print(cnt)
 
 
-# ops = []
-# for i, o in enumerate(op3):
-#     ops += [i for _ in range(o)]
+a = a3
+op = op3
+ops = []
+for i, o in enumerate(op):
+    ops += [i for _ in range(o)]
 
-# max_n = -float('inf')
-# min_n = float('inf')
-# perm(ops, a3)
-# print(max_n, min_n)
+max_n = -float('inf')
+min_n = float('inf')
+cnt = 0
+perm(ops, a)
+print(max_n, min_n)
+print(cnt)
