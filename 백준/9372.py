@@ -1,42 +1,36 @@
+from collections import defaultdict
 import heapq
 import sys
 input = sys.stdin.readline
 
-def find(parents, x):
-    if parents[x] != x:
-        parents[x] = find(parents, parents[x]) 
-    return parents[x]
+def prim(start=1):
+    visited = [False for _ in range(n+1)]
+    dist = []
+    heapq.heappush(dist, (0, start, start))
+    total_weights = 0
 
-def union(parents, a, b):
-    a = find(parents, a)
-    b = find(parents, b)
+    while dist:
+        c, past, cur = heapq.heappop(dist)
 
-    if a <= b:
-        parents[b] = a
-    else:
-        parents[a] = b
+        if not visited[cur]:
+            visited[cur] = True
+            total_weights += c
 
-N = int(input())
+            for nxt, cost in graph[cur].items():
+                print(cur, cost, nxt)
+                if not visited[nxt]:
+                    heapq.heappush(dist, (cost, cur, nxt))
+    
+    print(total_weights)
 
-for _ in range(N):
-    n, m = map(int, input().split())
+n = int(input())
+m = int(input())
 
-    parents = [i for i in range(n+1)]
-    graph = [[float('inf') for _ in range(n+1)] for _ in range(n+1)]
-    edges = []
-    for _ in range(m):
-        a, b = map(int, input().split())
-        c = 1
-        graph[a][b] = min(graph[a][b], c)
-        graph[b][a] = min(graph[b][a], c)
-        heapq.heappush(edges, (c, a, b))
-        heapq.heappush(edges, (c, b, a))
+def inf(): return float('inf')
+graph = {i: defaultdict(inf) for i in range(1, n+1)}
+for _ in range(m):
+    a, b, c = map(int, input().split())
+    graph[a][b] = min(graph[a][b], c)
+    graph[b][a] = min(graph[b][a], c)
 
-    connected = []
-    while edges:
-        cost, a, b = heapq.heappop(edges) # 작은 것을 뽑아서
-        if find(parents, a) != find(parents, b): # 사이클이 없으면 해당 edge 선택
-            connected.append((a, b))
-            union(parents, a, b)
-
-    print(len(connected))
+prim()
