@@ -1,43 +1,42 @@
-# input
-k = 10
-room_number = [1,3,4,1,3,1]
-# answer: [1,3,4,2,5,6]
-
-# algo
-# 이진탐색은 실패
-# find_parent방식으로 처리해야 해결 가능
+# solution 1
+from collections import defaultdict
 import sys
 sys.setrecursionlimit(int(2e9+1))
+
+def find(parent, x):
+    if not parent[x]:
+        parent[x] = x
+    if parent[x] != x:
+        parent[x] = find(parent, parent[x])
+    return parent[x]
+
+def union(parent, a, b):
+    a = find(parent, a)
+    b = find(parent, b)
+
+    if a > b:
+        parent[b] = a
+    else:
+        parent[a] = b
+
 def solution(k, room_number):
     answer = []
-    max_ = 0
-    occupied = [1 for _ in range(k+1)]
-    occupied[0] = 0
-
-    for rn in room_number:
-        if occupied[rn] == 1:
-            answer.append(rn)
-            occupied[rn] = 0
-            if rn > max_:
-                max_ = rn
-        else:
-            s = rn+1
-            e = max_+1
-            while s<=e:
-                mid = (s+e)//2
-                sum_ = sum(occupied[s:mid])
-                if occupied[mid] and sum_==0:
-                    occupied[mid] = 0
-                    answer.append(mid)
-                    if mid > max_:
-                        max_ = mid
-                    break
-                elif sum_ > 0:
-                    e = mid-1
-                else:
-                    s = mid+1
-    print(answer)
+    # parents = {i: i for i in range(1, k+1)}
+    parents = defaultdict(bool)
+    for n in room_number:
+        answer.append(find(parents, n))
+        union(parents, n, find(parents, n)+1)
+        
     return answer
+
+k = 10
+room_number = [1,3,4,1,3,1]
+
+print(solution(k, room_number))
+
+# solution 2
+import sys
+sys.setrecursionlimit(int(2e9+1))
 
 def solution(k, room_number):
     def find_parent(x):
@@ -51,12 +50,9 @@ def solution(k, room_number):
             return parent
 
     answer = []
-    # parents = [0 for _ in range(k+1)]
     parents = {}
 
     for rn in room_number:
         answer.append(find_parent(rn))
-    print(answer)
-    return answer
 
-solution(k, room_number)
+    return answer

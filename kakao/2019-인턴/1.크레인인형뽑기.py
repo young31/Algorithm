@@ -1,7 +1,38 @@
-board = [[0,0,0,0,0],[0,0,1,0,3],[0,2,5,0,1],[4,2,4,4,2],[3,5,1,3,1]]
+board = [[0,0,0,0,0],[0,0,1,0,3],[0,2,5,0,1],[4,2,4,4,2],[3,5,1,3,1]]	
 moves = [1,5,3,5,1,2,1,4]
 
-from pprint import pprint
+# solution 1
+from collections import deque
+
+def get(board, move):
+    n = len(board)
+    pick = 0
+    for i in range(n):
+        if board[i][move-1] != 0:
+            pick = board[i][move-1]
+            board[i][move-1] = 0
+            break
+    return pick
+        
+
+def solution(board, moves):
+    bucket = deque()
+    answer = 0
+    for move in moves:
+        pick = get(board, move)
+        if pick != 0:
+            if len(bucket) < 1:
+                bucket.append(pick)
+            else:
+                if bucket[-1] == pick:
+                    bucket.pop()
+                    answer += 2
+                else:
+                    bucket.append(pick)
+
+    return answer
+
+# solution 2
 from collections import deque
 
 def pick(board, col):
@@ -31,7 +62,6 @@ def solution(board, moves):
     answer = 0
     pack = Pack()
     for m in moves:
-        pprint(board)
         idx, item = pick(board, m-1)
         if idx != -1:
             pack.insert(item)
@@ -39,5 +69,3 @@ def solution(board, moves):
 
     answer = pack.cnt
     return answer
-
-print(solution(board, moves))

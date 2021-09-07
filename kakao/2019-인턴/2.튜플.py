@@ -1,9 +1,36 @@
-# input
-s = "{{1,2,3},{2,1},{1,2,4,3},{2}}"	
+# solution 1
+def parsing(s):
+    ls = []
+    flag = False
+    for i in s:
+        if i == '{':
+            flag = True
+            tmp = ''
+            continue
+        elif i == '}':
+            flag = False
+            ls.append(list(map(int, tmp.split(','))))
+            continue
+        if flag:
+            tmp += i
+    return ls
 
-# answer: [2, 1, 3, 4]
+def solution(s):
+    s = s[1:-1]
+    ls = parsing(s)
+    sort_key = {i: len(x) for i, x in enumerate(ls)}
+    answer = []
+    prev = None
+    for k in sorted(sort_key.keys(), key=sort_key.get):
+        if prev is None:
+            answer.append(ls[k][0])
+            prev = set(ls[k])
+        else:
+            answer.append(list(set(ls[k]) - prev)[0])
+            prev = set(ls[k])
+    return answer
 
-# algo
+# solution 2
 def parsing(s):
     exclude = ['{', '}', ',']
     res = []
@@ -33,6 +60,3 @@ def solution(s):
         answer.append(list(nxt)[0])
 
     return answer
-
-
-print(solution(s))

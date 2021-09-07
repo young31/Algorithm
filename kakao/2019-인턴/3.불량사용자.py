@@ -1,10 +1,33 @@
-# input
-user_id = ["frodo", "fradi", "crodo", "abc123", "frodoc"]
-banned_id = ["fr*d*", "*rodo", "******", "******"]
+# solution 1
+from itertools import product
 
-# answer: 3
+def solution(user_id, banned_id):
+    banned = []
+    for b_id in banned_id:
+        banned.append([])
+        for user in user_id:
+            if len(user) != len(b_id):
+                continue
+            else:
+                is_find = True
+                for a, b in zip(user, b_id):
+                    if b == '*':
+                        continue
+                    elif a == b:
+                        continue
+                    else:
+                        is_find = False
+                        break
+                if is_find:
+                    banned[-1].append(user)
 
-# algo
+    answer = []
+    for prod in product(*banned):
+        if set(prod) not in answer and len(set(prod)) == len(banned):
+            answer.append(set(prod))
+    return len(answer)
+
+# solution 2
 from itertools import product
 
 def is_match(a, b):
@@ -30,14 +53,11 @@ def solution(user_id, banned_id):
             if is_match(u, b):
                 tmp.append(u)
         possible.append(tmp)
-    print(possible)
 
     res = []
     for a in product(*possible):
         if len(a) == len(set(a)) and set(a) not in res:
             answer += 1
             res.append(set(a))
-    print(answer)
-    return answer
 
-solution(user_id, banned_id)
+    return answer
