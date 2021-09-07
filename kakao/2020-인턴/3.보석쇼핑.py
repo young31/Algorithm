@@ -1,12 +1,39 @@
-# input
-gems = ["AA", "AB", "AC", "AA", "AC"]
-# answer: 
-
-# algo
-from collections import Counter
-
+# solution 1
+from collections import defaultdict
 def solution(gems):
-    # cnt_dct = Counter(gems)
+    gem_names = set(gems)
+    # cnt = {i: 0 for i in gem_names}
+    cnt = defaultdict(int)
+    key_map = {x: i for i, x in enumerate(gem_names)}
+    s = 0
+    e = len(gem_names)-1
+    for i in range(s, e+1):
+        cnt[gems[i]] += 1
+    lens = float('inf')
+    while s <= e <= len(gems):
+        if s-e > lens:
+            cnt[gems[s]] -= 1
+            s += 1
+
+        if len(cnt) < len(gem_names):
+            e += 1
+            if e+1 <= len(gems):
+                cnt[gems[e]] += 1
+            else:
+                break
+        else:
+            if e-s < lens:
+                answer = [s+1, e+1]
+                lens = e-s
+            cnt[gems[s]] -= 1
+            if cnt[gems[s]] == 0:
+                cnt.pop(gems[s])
+            s += 1
+
+    return answer
+
+# solution 2
+def solution(gems):
     gem_set = set(gems)
     lens = len(gem_set)
     gem_dct = {k: i for i, k in enumerate(gem_set)}
@@ -51,7 +78,4 @@ def solution(gems):
                     r += 1
                     cnt[gem_dct[gems[r]]] += 1
 
-    print(answer)
     return answer
-
-solution(gems)
